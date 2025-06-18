@@ -164,10 +164,37 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
+    # 메모리 설정 최적화
+    torch.cuda.empty_cache()
+    # GPU 메모리 효율성을 위한 세팅
+    if torch.cuda.is_available():
+        torch.cuda.set_per_process_memory_fraction(0.9)  # GPU 메모리의 90%만 사용
+        # 메모리 할당자 설정 최적화
+        os.environ['PYTORCH_CUDA_ALLOC_CONF'] = 'expandable_segments:True'
+
     # load the model
+    print(f"Loading model from {args.model_path}...")
     tokenizer = AutoTokenizer.from_pretrained(args.model_path)
-    model = AutoModelForCausalLM.from_pretrained(args.model_path)
-    model.to("cuda")
+    
+    print("Configuring model to use GPU...")
+    if torch.cuda.is_available():
+        # GPU 메모리 상태 출력
+        free_memory = torch.cuda.get_device_properties(0).total_memory - torch.cuda.memory_allocated(0)
+        print(f"Available GPU memory: {free_memory / 1024**3:.2f} GB")
+        
+        # device_map 설정을 통해 메모리 효율성 높이기
+        model = AutoModelForCausalLM.from_pretrained(
+            args.model_path,
+            torch_dtype=torch.float16,  # 절반 정밀도 사용
+            device_map="auto",          # 자동으로 최적의 디바이스 맵 설정
+        )
+        print(f"Model loaded with device map: {model.hf_device_map if hasattr(model, 'hf_device_map') else 'cuda'}")
+    else:
+        print("No GPU available, using CPU...")
+        model = AutoModelForCausalLM.from_pretrained(args.model_path)
+        model.to("cpu")
+    
+    # 모델 설정
     model.set_point_backbone_dtype(torch.float32)
     model.eval()
 
