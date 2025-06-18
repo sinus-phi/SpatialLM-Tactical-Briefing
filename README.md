@@ -12,7 +12,7 @@
 <div align="center" style="margin-top: 0; padding-top: 0; line-height: 1;">
     <a href="https://manycore-research.github.io/SpatialLM" target="_blank" style="margin: 2px;"><img alt="Project"
     src="https://img.shields.io/badge/🌐%20Website-SpatialLM-ffc107?color=42a5f5&logoColor=white" style="display: inline-block; vertical-align: middle;"/></a>
-    <a href="https://github.com/sinus-phi/SpatialLM" target="_blank" style="margin: 2px;"><img alt="GitHub"
+    <a href="https://github.com/sinus-phi/SpatialLM-Tactical-Briefing" target="_blank" style="margin: 2px;"><img alt="GitHub"
     src="https://img.shields.io/badge/GitHub-SpatialLM-24292e?logo=github&logoColor=white" style="display: inline-block; vertical-align: middle;"/></a>
 </div>
 <div align="center" style="line-height: 1;">
@@ -59,8 +59,8 @@
 
 #### 1. 저장소 복제
 ```bash
-git clone https://github.com/sinus-phi/SpatialLM.git
-cd SpatialLM
+git clone https://github.com/sinus-phi/SpatialLM-Tactical-Briefing.git
+cd SpatialLM-Tactical-Briefing
 ```
 
 #### 2. Conda 환경 설정
@@ -270,7 +270,7 @@ SpatialLM-Testset에서의 성능:
 
 - **개발자**: sinus-phi
 - **이메일**: pjw9825@gmail.com
-- **GitHub**: https://github.com/sinus-phi/SpatialLM
+- **GitHub**: https://github.com/sinus-phi/SpatialLM-Tactical-Briefing
 
 ## 🙏 감사의 말
 
